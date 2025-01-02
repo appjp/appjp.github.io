@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অনলাইন সেবা</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #EADDCA, #C4A484, #ffffff);
+        }
+        .header {
+            background-color: #A0522D;
+            color: white;
+            padding: 8px 20px;
+            
+            font-size: 16px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+        .navbar {
+            position: sticky;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #8B4513;
+            padding: 10px 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        .navbar h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+        .menu {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 50px 20px;
+            z-index: 2000;
+            text-align: center;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px;
+            font-weight: bold;
+        }
+        .menu a:hover {
+            background-color: #004d40;
+            border-radius: 5px;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 50px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffff;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 40px;
+        }
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .hamburger div {
+            width: 30px;
+            height: 3px;
+            background-color: white;
+            
+        }
+        .slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slides img {
+            width: 100%;
+        }
+        .navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .navigation button {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 20px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .navigation button:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px;
+        }
+        .service {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .service:hover {
+            background: #e0f2f1;
+        }
+        .service span {
+            font-size: 40px;
+        }
+        .service p {
+            margin: 10px 0 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        @media screen and (max-width: 768px) {
+            .menu {
+                gap: 15px;
+            }
+        }
+        .services a {
+          text-decoration: none;
+          color: #000;
+        }
+        .aa {
+          text-decoration: none; color: white; background-color: #8B4513; padding: 10px 15px; border-radius: 5px; border: solid 1px white; font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>জয়পুরহাট</h1>
+        <p>আপনার প্রয়োজনীয় সেবাগুলি সহজেই পান</p>
+    </div>
+
+    <div class="navbar">
+        <a href="tel:999" class="aa">জরুরী সেবা ৯৯৯</a>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="menu" id="menu">
+        <button class="close-btn" onclick="toggleMenu()">X</button>
+        <a href="#home">প্রথম পাতা</a>
+        <a href="#services">সেবা সমূহ</a>
+        <a href="#about">আমাদের সম্পর্কে</a>
+        <a href="#contact">যোগাযোগ</a>
+        <a href="#faq">প্রশ্ন</a>
+        <a href="#feedback">মতামত</a>
+    </div>
+
+    <div class="slider">
+        <div class="slides">
+            <img src="1.jpg" alt="Slide 1">
+            <img src="2.jpg" alt="Slide 2">
+            <img src="3.jpg" alt="Slide 3">
+            <img src="4.jpg" alt="Slide 4">
+        </div>
+        <div class="navigation">
+            <button class="prev">❮</button>
+            <button class="next">❯</button>
+        </div>
+    </div>
+
+    <div id="services" class="services">
+        <div class="service">
+            <span>🩸</span>
+            <p>রক্তদাতা</p>
+        </div>
+        <div class="service">
+            <span>🏥</span>
+            <p>হাসপাতাল</p>
+        </div>
+        <div class="service">
+            <span>🚑</span>
+            <p>অ্যাম্বুলেন্স</p>
+        </div>
+        <div class="service">
+            <span>👨‍⚕️</span>
+            <p>ডাক্তার</p>
+        </div>
+        <div class="service">
+            <span>👮‍♂️</span>
+            <p>পুলিশ</p>
+        </div>
+        <div class="service">
+            <span>🚒</span>
+            <p>ফায়ার সার্ভিস</p>
+        </div>
+        <a href="#"><div class="service">
+             <span>🏫</span>
+            <p>বিদ্যালয়</p>
+        </div></a>
+<a href="#"><div class="service">
+             <span>🏦</span>
+            <p>ব্যাংক</p>
+        </div></a>
+<a href="#"><div class="service">
+             <span>🚆</span>
+            <p>রেল সেবা</p>
+        </div></a>
+<a href="#"><div class="service">
+             <span>🍜</span>
+            <p>রেস্টুরেন্ট</p>
+        </div></a>
+<a href="#"><div class="service">
+             <span>🏰</span>
+            <p>দর্শনীয় স্থান</p>
+        </div></a>
+<a href="#"><div class="service">
+             <span>🚚</span>
+            <p>কুরিয়ার সার্ভিস</p>
+        </div></a>
+<a href="#"><div class="service">
+             <span>🌐</span>
+            <p>ই-সেবা</p>
+        </div></a>
+<a href="#"><div class="service">
+             <span>📰</span>
+            <p>নিউজ</p>
+        </div></a>
+<a href="#"><div class="service">
+             <span>🎓</span>
+            <p>বোর্ড রেজাল্ট</p>
+        </div></a>
+<a href="#"><div class="service">
+             <span>🚍</span>
+            <p>বাস টিকিট</p>
+        </div></a>
+<a href="#"><div class="service">
+             <span>💊</span>
+            <p>ঔষধ</p>
+        </div></a>
+<a href="#"><div class="service">
+             <span>🛍️</span>
+            <p>শপিং</p>
+        </div></a>
+<a href="#"><div class="service">
+    <span>📚</span>
+    <p>লাইব্রেরি</p>
+</div></a>
+<a href="#"><div class="service">
+    <span>💡</span>
+    <p>বিদ্যুৎ বিল পরিশোধ</p>
+</div></a>
+<a href="#"><div class="service">
+    <span>🔥</span>
+    <p>গ্যাস বিল পরিশোধ</p>
+</div></a>
+<a href="#"><div class="service">
+    <span>📜</span>
+    <p>জন্ম সনদ</p>
+</div></a>
+<a href="#"><div class="service">
+    <span>🛂</span>
+    <p>পাসপোর্ট সেবা</p>
+</div></a>
+<a href="#"><div class="service">
+    <span>🌐</span>
+    <p>ইন্টারনেট সেবা</p>
+</div></a>
+<a href="#"><div class="service">
+    <span>🏢</span>
+    <p>বীমা সেবা</p>
+</div></a>
+<a href="#"><div class="service">
+    <span>⚖️</span>
+    <p>নোটারি পাবলিক</p>
+</div></a>
+<a href="#"><div class="service">
+    <span>⚖️</span>
+    <p>নোটারি পাবলিক</p>
+</div></a>
+        
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let autoSlideTimeout;
+        const slides = document.querySelector('.slides');
+        const slideImages = document.querySelectorAll('.slides img');
+        const totalSlides = slideImages.length;
+
+        document.querySelector('.next').addEventListener('click', () => {
+            clearTimeout(autoSlideTimeout);
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        });
+
+        document.querySelector('.prev').addEventListener('click', () => {
+            clearTimeout(autoSlideTimeout);
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+
+        function updateSlider() {
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            autoSlideTimeout = setTimeout(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            }, 6000);
+        }
+
+        autoSlideTimeout = setTimeout(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }, 3000);
+
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>
