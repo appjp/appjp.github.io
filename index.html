@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অনলাইন সেবা</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Noto+Color+Emoji&family=Noto+Emoji:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Anek Bangla", serif;
+            margin: 0;
+            padding: 0;
+            color: #000;
+            background: #fff;
+        }
+        .header {
+          
+            background-color: #fff;
+            color: #000;
+            padding: 8px 20px;
+            
+            font-size: 16px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+        .navbar {
+            
+            position: sticky;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            padding: 10px 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+            color: #000;
+        }
+        .navbar h2 {
+          
+            margin: 0;
+            font-size: 20px;
+        }
+        .menu {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #1c1c1c;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 50px 20px;
+            z-index: 2000;
+            text-align: center;
+        }
+        .menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px;
+            font-weight: bold;
+        }
+        .menu a:hover {
+            background-color: #424242;
+            border-radius: 5px;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 50px;
+            background: #1c1c1c;
+            color: #ffff;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 40px;
+        }
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .hamburger div {
+            width: 30px;
+            height: 3px;
+            background-color: #5c5c5c;
+            
+        }
+        .slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin: 5px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slides img {
+            width: 100%;
+        }
+        .navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .navigation button {
+            background: rgba(10, 10, 10, 0.5);
+
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .navigation button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            grid-auto-rows: minmax(auto, max-content);
+            padding: 15px;
+        }
+        
+
+        .service {
+            background: #fff;
+            color: #000;
+            border: 0.5px solid #424242;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+        .service:hover {
+            background: #2c2c2c;
+            color: #fff;
+        }
+        .service span {
+            font-size: 40px;
+            font-family: "Noto Color Emoji", serif;
+            color: #989898;
+        }
+        .service p {
+            margin: 10px 0 0;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        @media screen and (max-width: 768px) {
+            .menu {
+                gap: 15px;
+            }
+        }
+        .services a {
+          text-decoration: none;
+          
+        }
+        .aa {
+          text-decoration: none; color: #3e3e3e;    font-weight: bold;
+          font-size: 17px;
+        }
+        .last {
+          text-align: center;
+        }
+        .last a {
+          text-decoration: none;
+          color: #008546;
+          font-weight: bold;
+        }
+        .last p {
+          font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+   
+
+    <div class="navbar">
+        <a class="aa">জয়পুরহাট অ্যাপ</a>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="menu" id="menu">
+        <button class="close-btn" onclick="toggleMenu()">X</button>
+        <a href="https://jpseba.blogspot.com/p/app-info.html">অ্যাপ সম্পর্কে</a>
+        <a href="https://jpseba.blogspot.com/p/contact.html">যোগাযোগ</a>
+    </div>
+
+    <div class="slider">
+        <div class="slides">
+            <img src="1.jpg" alt="Slide 1">
+            <img src="2.jpg" alt="Slide 2">
+            <img src="3.jpg" alt="Slide 3">
+            <img src="4.jpg" alt="Slide 4">
+        </div>
+        <div class="navigation">
+            <button class="prev">❮</button>
+            <button class="next">❯</button>
+        </div>
+    </div>
+
+    <div id="services" class="services">
+       <a href="https://jpseba.blogspot.com/p/bl.html"> <div class="service">
+            <span>🩸</span>
+            <p>রক্তদাতা</p>
+        </div></a>
+       <a href="https://jpseba.blogspot.com/p/hospital.html"> <div class="service">
+            <span>🏥</span>
+            <p>হাসপাতাল</p>
+        </div></a>
+        
+       <a href="https://jpseba.blogspot.com/p/clinic.html"> <div class="service">
+            <span>🧑‍⚕︎</span>
+            <p>ক্লিনিক</p>
+        </div></a>
+        
+        <a href="https://jpseba.blogspot.com/p/fire-service.html"><div class="service">
+            <span>🚒</span>
+            <p>ফায়ার সার্ভিস</p>
+        </div></a>
+        <a href="https://jpseba.blogspot.com/p/ambulance.html"><div class="service">
+            <span>🚑</span>
+            <p>অ্যাম্বুলেন্স সার্ভিস</p>
+        </div></a>
+        <a href="https://jpseba.blogspot.com/p/registration.html"><div class="service">
+    <span>🪪</span>
+    <p>লগইন/রেজিস্ট্রেশন</p>
+</div></a>
+<a href="https://jpseba.blogspot.com/p/police.html"><div class="service">
+            <span>👮</span>
+            <p>থানা-পুলিশ</p>
+        </div></a>
+        <a href="https://jpseba.blogspot.com/p/call.html"><div class="service">
+             <span>📞</span>
+            <p>জরুরী সেবা</p>
+        </div></a>
+        <a href="https://jpseba.blogspot.com/p/school.html"><div class="service">
+             <span>🏫</span>
+            <p>বিদ্যালয়</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/bank.html"><div class="service">
+             <span>🏦</span>
+            <p>ব্যাংক</p>
+        </div></a>
+
+<a href="https://jpseba.blogspot.com/p/restaurant.html">
+  <div class="service">
+             <span>🍜</span>
+            <p>রেস্টুরেন্ট</p>
+        </div>
+        </a>
+<a href="https://jpseba.blogspot.com/p/location.html">
+  <div class="service">
+             <span>🏰</span>
+            <p>দর্শনীয় স্থান</p>
+        </div>
+        </a>
+        <a href="https://jpseba.blogspot.com/p/train.html"><div class="service">
+             <span>🚆</span>
+            <p>ট্রেনের সময়সূচি</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/ks.html">
+  <div class="service">
+             <span>🚚</span>
+            <p>কুরিয়ার সার্ভিস</p>
+        </div>
+        </a>
+        <a href="https://jpseba.blogspot.com/p/drone.html"><div class="service">
+             <span>📷</span>
+            <p>ড্রোন ফটোগ্রাফি</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/es.html"><div class="service">
+             <span>🌐</span>
+            <p>ই-সেবা</p>
+        </div></a>
+        <a href="https://jpseba.blogspot.com/p/store.html"><div class="service">
+             <span>🛍︎️</span>
+            <p>শপিং</p>
+        </div></a>
+        <a href="https://jpseba.blogspot.com/p/hotel.html"><div class="service">
+             <span>🏨</span>
+            <p>হোটেল</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/br.html"><div class="service">
+             <span>🎓</span>
+            <p>বোর্ড রেজাল্ট</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/bus.html"><div class="service">
+             <span>🚍</span>
+            <p>বাসের সময়সূচি</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/e-office.html"><div class="service">
+    <span>💡</span>
+    <p>বিদ্যুৎ অফিস</p>
+</div></a>
+<a href="https://jpseba.blogspot.com/p/gas.html"><div class="service">
+    <span>🔥</span>
+    <p>গ্যাস সার্ভিস</p>
+</div></a>
+
+       
+        <a href="https://jpseba.blogspot.com/p/hs.html"><div class="service">
+             <span>🏡</span>
+            <p>বাসা ভাড়া</p>
+        </div></a>
+
+<a href="https://jpseba.blogspot.com/p/cs.html"><div class="service">
+             <span>🚗</span>
+            <p>গাড়ি ভাড়া</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/sm.html"><div class="service">
+             <span>🧑‍🔧</span>
+            <p>মিস্ত্রী</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/bm.html"><div class="service">
+             <span>🧑‍💼</span>
+            <p>উদ্যোক্তা</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/cs_3.html"><div class="service">
+             <span>👨‍🏫</span>
+            <p>কোচিং</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/p.html"><div class="service">
+             <span>💅</span>
+            <p>পার্লার</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/flat.html"><div class="service">
+             <span>🌆</span>
+            <p>ফ্লাট ও জমি</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/tournament.html"><div class="service">
+             <span>🏆</span>
+            <p>টুর্নামেন্ট</p>
+        </div></a>
+        
+        <a href="https://jpseba.blogspot.com/p/event.html"><div class="service">
+    <span>🎉</span>
+    <p>অনুষ্ঠান / ইভেন্ট</p>
+</div></a>
+<a href="https://jpseba.blogspot.com/p/video.html"><div class="service">
+    <span>🎞️</span>
+    <p>ভিডিও এবং বিনোদন</p>
+</div></a>
+<a href="https://jpseba.blogspot.com/p/internet.html"><div class="service">
+    <span>🌐</span>
+    <p>ইন্টারনেট সেবা</p>
+</div></a>
+         <a href="https://jpseba.blogspot.com/p/music.html"><div class="service">
+             <span>🎧</span>
+            <p>মিউজিক</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/game.html"><div class="service">
+             <span>🎮</span>
+            <p>গেম</p>
+        </div></a>
+<a href="https://jpseba.blogspot.com/p/news.html"><div class="service">
+             <span>📰</span>
+            <p>নিউজ</p>
+        </div></a>
+
+
+
+
+
+    </div>
+    <hr><br>
+  
+    
+<div style="display: flex; justify-content: center; margin: auto"><iframe allowFullScreen="allowFullScreen" src="http://www.youtube.com/embed/ZD1eMz0RsvY?yt:stretch=16:9&vq=hd720p&loop=0&color=red&iv_load_policy=3&rel=0&showinfo=0&autohide=0&controls=1" width="300" height="170" allowtransparency="true" frameborder="0" ></iframe></div>
+<div class="last">
+<p>Developed by <a href="https://www.facebook.com/Akher.Sheikh.profile">Akher Sheikh</a></p>
+</div>
+    <script>
+        let currentSlide = 0;
+        let autoSlideTimeout;
+        const slides = document.querySelector('.slides');
+        const slideImages = document.querySelectorAll('.slides img');
+        const totalSlides = slideImages.length;
+
+        document.querySelector('.next').addEventListener('click', () => {
+            clearTimeout(autoSlideTimeout);
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        });
+
+        document.querySelector('.prev').addEventListener('click', () => {
+            clearTimeout(autoSlideTimeout);
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+
+        function updateSlider() {
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            autoSlideTimeout = setTimeout(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            }, 6000);
+        }
+
+        autoSlideTimeout = setTimeout(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }, 3000);
+
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+    <br><br>
+</body>
+</html>
