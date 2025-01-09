@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>জয়পুরহাট জেলার নামাজের সময়সূচী</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background: #f8f8f8;
+            color: #555;
+        }
+        td {
+            color: #666;
+        }
+        #date-container {  
+            font-family: Arial, sans-serif;  
+            padding: 20px;  
+             
+            text-align: center;  
+            
+            width: 70%;  
+            margin: auto;  
+            
+        }  
+        .date {  
+            margin: 10px 0;  
+            font-size: 14px;  
+            color: #333;  
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>জয়পুরহাট জেলার নামাজের সময়সূচী</h1>
+        <p style="margin-top: 20px; font-size: 12px; color: gray;">
+    Prayer times are fetched from Aladhan API.
+</p>
+ <p id="date"></p>
+<script>
+  var options = { year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById("date").innerHTML = "Date: " + new Date().toLocaleDateString('en-US', options);
+</script>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>নামাজ</th>
+                    <th>সময়</th>
+                </tr>
+            </thead>
+            <tbody id="prayerTimes">
+                <tr>
+                    <td colspan="2">লোড হচ্ছে...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+<script>
+    // ১২-ঘণ্টা ফরম্যাটে সময় রূপান্তরের ফাংশন
+    function convertTo12HourFormat(time) {
+        const [hour, minute] = time.split(':');
+        const period = +hour < 12 ? 'AM' : 'PM';
+        const hour12 = +hour % 12 || 12;
+        return `${hour12}:${minute} ${period}`;
+    }
+
+    // নামাজের সময়সূচী ফেচ করার ফাংশন
+    async function fetchPrayerTimes() {
+        try {
+            const response = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Joypurhat&country=Bangladesh&method=2');
+            const data = await response.json();
+
+            if (data.code === 200) {
+                const timings = data.data.timings;
+
+                const prayerTimes = document.getElementById('prayerTimes');
+                prayerTimes.innerHTML = `
+                    <tr>
+                        <td>ফজর</td>
+                        <td>${convertTo12HourFormat(timings.Fajr)} - ${convertTo12HourFormat(timings.Sunrise)}</td>
+                    </tr>
+                    <tr>
+                        <td>যোহর</td>
+                        <td>${convertTo12HourFormat(timings.Dhuhr)} - ${convertTo12HourFormat(timings.Asr)}</td>
+                    </tr>
+                    <tr>
+                        <td>আসর</td>
+                        <td>${convertTo12HourFormat(timings.Asr)} - ${convertTo12HourFormat(timings.Maghrib)}</td>
+                    </tr>
+                    <tr>
+                        <td>মাগরিব</td>
+                        <td>${convertTo12HourFormat(timings.Maghrib)} - ${convertTo12HourFormat(timings.Isha)}</td>
+                    </tr>
+                    <tr>
+                        <td>ইশা</td>
+                        <td>${convertTo12HourFormat(timings.Isha)} - ${convertTo12HourFormat(timings.Midnight)}</td>
+                    </tr>
+                `;
+            } else {
+                alert('ডেটা ফেচ করা সম্ভব হয়নি। পরে আবার চেষ্টা করুন।');
+            }
+        } catch (error) {
+            console.error('Error fetching prayer times:', error);
+            alert('সার্ভার থেকে তথ্য আনতে সমস্যা হয়েছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।');
+        }
+    }
+
+    fetchPrayerTimes();
+</script>
+
+
+
+
+
+
+
+
+    <br><br><br><center><p>© Joypurhat App</p></center>
+</body>
+</html>
