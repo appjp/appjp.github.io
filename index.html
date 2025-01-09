@@ -253,8 +253,8 @@
             <p>অ্যাম্বুলেন্স সার্ভিস</p>
         </div></a>
         <a href="https://jpseba.blogspot.com/p/registration.html"><div class="service">
-    <span>🪪</span>
-    <p>লগইন/রেজিস্ট্রেশন</p>
+    <span class="p">🕌</span>
+    <p>নামাজের সময়সূচী</p>
 </div></a>
 <a href="police.html"><div class="service">
             <span>👮</span>
@@ -375,18 +375,7 @@
     <span>🌐</span>
     <p>ইন্টারনেট সেবা</p>
 </div></a>
-         <a href="https://jpseba.blogspot.com/p/music.html"><div class="service">
-             <span>🎧</span>
-            <p>মিউজিক</p>
-        </div></a>
-<a href="https://jpseba.blogspot.com/p/game.html"><div class="service">
-             <span>🎮</span>
-            <p>গেম</p>
-        </div></a>
-<a href="https://jpseba.blogspot.com/p/news.html"><div class="service">
-             <span>📰</span>
-            <p>নিউজ</p>
-        </div></a>
+         
 
 
 
@@ -394,55 +383,13 @@
 
     </div>
     <hr><br>
-   <p style="text-align: center; font-size: 16px; color: #333;">
-    New version <b>1.1</b> is available! 
-    <a href="https://jpseba.blogspot.com/p/download.html?target=open_chrome" style="color: #007bff; text-decoration: underline;">Download here</a>
-   </p>
+
     
 <div class="last">
 <p style="font-size: 17px;">This application is <br>developed and owned by <a href="https://www.facebook.com/Akher.Sheikh.profile">Akher Sheikh</a>.</p><hr>
 <p style="font-size: 14px;">Special Thanks to: <a style="" href="https://www.facebook.com/mdfaijul.islam.1291">MD Faijul Islam</a><p>
 </div>
 
-    <div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
-
-<div id="updatePopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 400px; background: #fff; border-radius: 10px; padding: 20px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); z-index: 1000; text-align: center; font-family: Arial, sans-serif;">
-    <h3 style="margin: 0 0 10px; font-size: 18px; color: #333;">Joypurhat App</h3>
-    <p style="margin: 10px 0; font-size: 16px; color: #555;">New version <b>1.1</b> is available. Please update to enjoy the latest features!</p>
-    <button id="downloadButton" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-right: 10px;">Download</button>
-    <button id="closePopup" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Close</button>
-</div>
-
-<script>
-    // Check if the popup has been shown before
-    const popupShown = localStorage.getItem('updatePopupShown');
-
-    if (!popupShown) {
-        // Show the popup and overlay
-        document.getElementById('popupOverlay').style.display = 'block';
-        document.getElementById('updatePopup').style.display = 'block';
-
-        // When the user clicks the "Download" button
-        document.getElementById('downloadButton').addEventListener('click', function() {
-            // Redirect to the download link
-            window.location.href = 'https://jpseba.blogspot.com/p/download.html?target=open_chrome'; // Replace with your actual download link
-            // Mark popup as shown
-            localStorage.setItem('updatePopupShown', 'true');
-            // Hide the popup and overlay
-            document.getElementById('popupOverlay').style.display = 'none';
-            document.getElementById('updatePopup').style.display = 'none';
-        });
-
-        // When the user clicks the "Close" button
-        document.getElementById('closePopup').addEventListener('click', function() {
-            // Mark popup as shown
-            localStorage.setItem('updatePopupShown', 'true');
-            // Hide the popup and overlay
-            document.getElementById('popupOverlay').style.display = 'none';
-            document.getElementById('updatePopup').style.display = 'none';
-        });
-    }
-</script>
     <script>
         let currentSlide = 0;
         let autoSlideTimeout;
