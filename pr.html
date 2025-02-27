@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রাকৃতিক দৃশ্য গ্যালারি</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: white;
+        }
+        .header {
+            background: #1e1e1e;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .filter-container {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .filter-container select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #333;
+            color: white;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .gallery img {
+            width: 280px;
+            height: 180px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            opacity: 0;
+            filter: blur(5px);
+            transition: opacity 0.8s, filter 0.8s;
+        }
+        .gallery img.lazy-loaded {
+            opacity: 1;
+            filter: blur(0);
+        }
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox img {
+            width: 98%;
+            
+            
+        }
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+        .pagination {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .pagination button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+        }
+        .pagination button.active {
+            background-color: #4CAF50;
+        }
+        .pagination button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+        p{
+          text-align: center;
+        }
+        a{
+          text-decoration: none;
+          color: #1158ff;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="header">প্রাকৃতিক দৃশ্য গ্যালারি</div>
+
+    <div class="filter-container">
+        <label for="category">ফিল্টার করুন:</label>
+        <select id="category">
+    <option value="nature" selected>সব</option>
+    <!-- প্রাকৃতিক দৃশ্য (৮০টি) -->
+    <option value="forest">বন</option>
+    <option value="waterfall">জলপ্রপাত</option>
+    <option value="beach">সৈকত</option>
+    <option value="mountains">পর্বত</option>
+    <option value="sunset">সূর্যাস্ত</option>
+    <option value="flowers">ফুল</option>
+    <option value="desert">মরুভূমি</option>
+    <option value="river">নদী</option>
+    <option value="lake">হ্রদ</option>
+    <option value="snow">তুষার</option>
+    <option value="valley">উপত্যকা</option>
+    <option value="rainforest">রেইনফরেস্ট</option>
+    <option value="cave">গুহা</option>
+    <option value="island">দ্বীপ</option>
+    <option value="meadow">মাঠ</option>
+    <option value="hill">টিলা</option>
+    <option value="sky">আকাশ</option>
+    <option value="storm">ঝড়</option>
+    <option value="aurora">অরোরা (বোরিয়ালিস)</option>
+    <option value="cliff">খাড়া পাহাড়</option>
+    <option value="geyser">গিজার</option>
+    <option value="ocean">মহাসাগর</option>
+    <option value="coral">প্রবাল</option>
+    <option value="vineyard">আঙুর ক্ষেত</option>
+    <option value="savanna">সাভানা</option>
+    <option value="glacier">হিমবাহ</option>
+    <option value="volcano">আগ্নেয়গিরি</option>
+    <option value="canyon">গিরিখাত</option>
+    <option value="fog">কুয়াশা</option>
+    <option value="rain">বৃষ্টি</option>
+    <option value="thunderstorm">বজ্রপাত</option>
+    <option value="rainbow">রংধনু</option>
+    <option value="sunrise">সূর্যোদয়</option>
+    <option value="autumn">শরৎ</option>
+    <option value="spring">বসন্ত</option>
+    <option value="winter">শীত</option>
+    <option value="summer">গ্রীষ্ম</option>
+    <option value="field">ক্ষেত</option>
+    <option value="jungle">জঙ্গল</option>
+    <option value="mangrove">ম্যানগ্রোভ</option>
+    <option value="dune">বালির পাহাড়</option>
+    <option value="countryside">গ্রামাঞ্চল</option>
+    <option value="waterfall-rocks">পাথরের জলপ্রপাত</option>
+    <option value="wildflowers">বন্য ফুল</option>
+    <option value="tundra">তুন্দ্রা</option>
+    <option value="waves">সমুদ্রের ঢেউ</option>
+    <option value="hot-springs">গরম পানির ঝর্ণা</option>
+    <option value="pineforest">পাইন বন</option>
+    <option value="cherry-blossom">চেরি ব্লসম</option>
+    <option value="rice-field">ধানক্ষেত</option>
+    <option value="lavender-field">ল্যাভেন্ডার ক্ষেত</option>
+    <option value="tropical">উষ্ণমন্ডলীয়</option>
+    <option value="iceberg">আইসবার্গ</option>
+    <option value="mossy-forest">শৈবালময় বন</option>
+    <option value="rocky-coast">পাথুরে উপকূল</option>
+    <option value="lotus-pond">পদ্ম পুকুর</option>
+    <option value="butterfly-garden">প্রজাপতি বাগান</option>
+    <option value="fireflies">জোনাকিপোকা</option>
+    <option value="horizon">দিগন্ত</option>
+    <option value="palm-tree">নারকেল গাছ</option>
+    <option value="starry-night">তারা খচিত রাত</option>
+    <option value="mountain-road">পর্বতের রাস্তা</option>
+    <option value="deep-forest">গভীর বন</option>
+    <option value="coral-reef">প্রবাল প্রাচীর</option>
+    <option value="gorge">গিরিখাত</option>
+    <option value="redwood-forest">রেডউড বন</option>
+    <option value="coconut-grove">নারকেল বন</option>
+    <option value="salt-flat">লবণের মাঠ</option>
+    <option value="wild-river">বন্য নদী</option>
+    <option value="hidden-cave">গোপন গুহা</option>
+    <option value="green-landscape">সবুজ প্রাকৃতিক দৃশ্য</option>
+    <option value="water-lilies">পানিফুল</option>
+
+   <option value="lion">সিংহ</option>
+<option value="tiger">বাঘ</option>
+<option value="elephant">হাতি</option>
+<option value="giraffe">জিরাফ</option>
+<option value="zebra">জেব্রা</option>
+<option value="deer">হরিণ</option>
+<option value="panda">পান্ডা</option>
+<option value="koala">কোয়ালা</option>
+<option value="kangaroo">ক্যাঙ্গারু</option>
+<option value="wolf">নেকড়ে</option>
+<option value="fox">শিয়াল</option>
+<option value="bear">ভাল্লুক</option>
+<option value="monkey">বানর</option>
+<option value="rabbit">খরগোশ</option>
+<option value="eagle">ঈগল</option>
+<option value="peacock">ময়ূর</option>
+<option value="dolphin">ডলফিন</option>
+<option value="whale">তিমি</option>
+<option value="penguin">পেঙ্গুইন</option>
+<option value="crocodile">কুমির</option>
+<option value="snake">সাপ</option>
+<option value="frog">ব্যাঙ</option>
+<option value="parrot">তোতা পাখি</option>
+<option value="owl">পেঁচা</option>
+<option value="butterfly">প্রজাপতি</option>
+<option value="cheetah">চিতা</option>
+<option value="leopard">চিতাবাঘ</option>
+<option value="hippopotamus">হাতি ঘোড়া</option>
+<option value="rhinoceros">গণ্ডার</option>
+<option value="buffalo">মহিষ</option>
+<option value="camel">উট</option>
+<option value="gorilla">গরিলা</option>
+<option value="chimpanzee">শিম্পাঞ্জি</option>
+<option value="bat">বাদুড়</option>
+<option value="swan">রাজহাঁস</option>
+<option value="flamingo">ফ্লেমিঙ্গো</option>
+<option value="shark">হাঙ্গর</option>
+<option value="octopus">অক্টোপাস</option>
+<option value="jellyfish">জেলিফিশ</option>
+<option value="starfish">তারামাছ</option>
+<option value="crab">কাঁকড়া</option>
+<option value="lobster">লবস্টার</option>
+<option value="seahorse">সিহর্স</option>
+<option value="tortoise">কচ্ছপ</option>
+<option value="chameleon">গিরগিটি</option>
+<option value="kangaroo-rat">ক্যাঙ্গারু ইঁদুর</option>
+<option value="meerkat">মিয়ারক্যাট</option>
+<option value="armadillo">আর্মাডিলো</option>
+
+</select>
+
+
+    </div>
+
+    <div class="gallery" id="image-gallery"></div>
+
+    <div class="pagination" id="pagination"></div>
+    <p>Developed by <a href="https://www.facebook.com/Akher.Sheikh.profile">Akher Sheikh</a></p><br>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="বড় ছবি">
+    </div>
+
+    <script>
+        const apiKey = "49086161-e197d1f604bc83669520c7281";
+        const gallery = document.getElementById("image-gallery");
+        const categorySelect = document.getElementById("category");
+        const paginationContainer = document.getElementById("pagination");
+
+        let currentPage = 1;
+        let totalPages = 1;
+        let currentCategory = "nature";
+
+        function fetchImages(category = "nature", page = 1) {
+            gallery.innerHTML = "<p>লোড হচ্ছে...</p>";
+            fetch(`https://pixabay.com/api/?key=${apiKey}&q=${category}&image_type=photo&orientation=horizontal&per_page=20&page=${page}`)
+                .then(response => response.json())
+                .then(data => {
+                    gallery.innerHTML = "";
+                    data.hits.forEach(image => {
+                        const imgElement = document.createElement("img");
+                        imgElement.dataset.src = image.webformatURL;
+                        imgElement.alt = "Image";
+                        imgElement.classList.add("lazy-load");
+                        imgElement.onclick = () => openLightbox(image.largeImageURL);
+                        gallery.appendChild(imgElement);
+                    });
+                    applyLazyLoad();
+                    totalPages = Math.ceil(data.totalHits / 20);
+                    updatePagination();
+                })
+                .catch(error => {
+                    gallery.innerHTML = "<p>ছবি লোড করা সম্ভব হয়নি!</p>";
+                    console.error("Error fetching images:", error);
+                });
+        }
+
+        function openLightbox(imgSrc) {
+            document.getElementById("lightbox-img").src = imgSrc;
+            document.getElementById("lightbox").style.display = "flex";
+        }
+
+        function closeLightbox() {
+            document.getElementById("lightbox").style.display = "none";
+        }
+
+        function applyLazyLoad() {
+            const lazyImages = document.querySelectorAll(".lazy-load");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.getAttribute("data-src");
+                        img.classList.add("lazy-loaded");
+                        observer.unobserve(img);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            lazyImages.forEach(img => observer.observe(img));
+        }
+
+        function updatePagination() {
+            paginationContainer.innerHTML = "";
+
+            let startPage = Math.max(1, currentPage - 2);
+            let endPage = Math.min(totalPages, currentPage + 2);
+
+            for (let i = startPage; i <= endPage; i++) {
+                const button = document.createElement("button");
+                button.textContent = i;
+                if (i === currentPage) {
+                    button.classList.add("active");
+                }
+                button.addEventListener("click", () => {
+                    currentPage = i;
+                    fetchImages(currentCategory, currentPage);
+                });
+                paginationContainer.appendChild(button);
+            }
+        }
+
+        categorySelect.addEventListener("change", () => {
+            currentCategory = categorySelect.value;
+            currentPage = 1;
+            fetchImages(currentCategory, currentPage);
+        });
+
+        categorySelect.value = currentCategory;
+        fetchImages(currentCategory, currentPage);
+    </script>
+
+</body>
+</html>
