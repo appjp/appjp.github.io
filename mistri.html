@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Style */
+        header {
+            background-color: #000;
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 0.5px solid #000;
+            border-radius: 8px;
+            width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border: solid 0.5px #333;
+        }
+
+        /* Sponsor Label */
+        .sponsor-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            border-radius: 4px;
+        }
+
+        .card-content {
+            padding: 5px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin: 2px 0;
+            color: #333;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            color: #666;
+            margin: 2px 0;
+            text-align: left;
+        }
+
+        .card-description .see-more {
+            color: #000;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .card-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            margin-bottom: 0px;
+            background-color: #007bff;
+            color: #ffffff;
+            width: 85%;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .card-button:hover {
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>মিস্ত্রী/টেকনিশিয়ান</h1>
+    </header>
+
+    <!-- Card Container -->
+    
+    <div class="container">
+      <!--
+        <div class="card">
+            <img src="https://raw.githubusercontent.com/appjp/appjp.github.io/refs/heads/main/jpapp.jpg.jpg" alt="Card Image">
+            <div class="sponsor-label">Sponsored</div>
+            <div class="card-content">
+                <h3 class="card-title">বিজ্ঞাপন দিন
+                </h3>
+                <p class="card-description" id="desc1">
+                    এখানে আপনার প্রতিষ্ঠান বা পণ্যের বিজ্ঞাপন দিন
+                </p>
+                <a href="#" class="card-button">Contact</a>
+            </div>
+        </div>
+-->
+        <div class="card">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEio-2m1Pn1mCUrG7Xc9XQZXCAkVFsq1yZ-TfrQtMGGb0FF2OgBfFoQYkgKnBdC0pL-j1wH4yo87fVmMSEbgxpNtZQekr42UYMnOZUtTE3Bj5gGpOqezLoMG3keF0vkV4PUllAzW8ZTptkbJOafAVIAgQs7i1M1EtzNj2B6OZtDTg2imN3Z6pNe-5X0S0rg/s297/1000046151.jpg" alt="Card Image">
+            
+            <div class="card-content">
+                <h3 class="card-title">ইলেকট্রিক এন্ড ইলেকট্রনিকস টেকনিশিয়ান।
+                </h3>
+                <p class="card-description" id="desc2">
+                  আমি একজন অভিজ্ঞ টেকনিশিয়ান,আমার ৭ বছরের অভিজ্ঞতা। আমি ইলেক্ট্রিক , ফ্রিজ, এসি, কিংবা অন্যান্য ইলেকট্রনিক ডিভাইস সার্ভিসিং করে থাকি। আমি দ্রুত ও নির্ভরযোগ্য সার্ভিস দিয়ে থাকি। আপনার প্রয়োজন অনুযায়ী হোম সার্ভিসও প্রদান করা হয়। আমি ইলেক্ট্রিক ও এসি ফ্রিজ এর সমস্যা সমাধানে দক্ষ। উক্ত বিষয়ে যেকোন সমস্যা হলে যোগাযোগ করবেন।
+                </p>
+                <a href="tel:01303586766" class="card-button">Call Now</a>
+            </div>
+        </div>
+    </div>
+  <br><br><br><center><p>© Joypurhat App</p></center>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const maxLength = 100; // Maximum number of characters before truncating
+            const descriptions = document.querySelectorAll(".card-description");
+
+            descriptions.forEach((desc) => {
+                const fullText = desc.textContent.trim();
+
+                if (fullText.length > maxLength) {
+                    const truncatedText = fullText.slice(0, maxLength) + "... ";
+                    desc.innerHTML = truncatedText + `<span class="see-more" onclick="toggleDescription(this, '${fullText}')">See More</span>`;
+                }
+            });
+        });
+
+        function toggleDescription(element, fullText) {
+            const description = element.parentElement;
+
+            if (element.textContent === "See More") {
+                description.innerHTML = fullText + ` <span class="see-more" onclick="toggleDescription(this, '${fullText}')">See Less</span>`;
+            } else {
+                const truncatedText = fullText.slice(0, 100) + "... ";
+                description.innerHTML = truncatedText + `<span class="see-more" onclick="toggleDescription(this, '${fullText}')">See More</span>`;
+            }
+        }
+    </script>
+</body>
+</html>
