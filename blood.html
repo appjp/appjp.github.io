@@ -183,7 +183,7 @@
 <p><strong>সচেতন হোন, নিরাপদ থাকুন — জীবন বাঁচান।</strong></p>
 
   <script>
-  const domain = 'http://joypurhat-com.us.hostnil.uk';
+  const domain = 'https://blood.akhersheikh8.workers.dev/';
 
   function searchDonors() {
     const group = document.getElementById('group').value;
@@ -196,7 +196,7 @@
       return;
     }
 
-    const url = domain + '/bloodapi.php?group=' + encodeURIComponent(group) + '&upazila=' + encodeURIComponent(upazila);
+    const url = domain + '/api?group=' + encodeURIComponent(group) + '&upazila=' + encodeURIComponent(upazila);
 
     // XMLHttpRequest ব্যবহার করা হলো WebView এর জন্য বেশি উপযুক্ত
     const xhr = new XMLHttpRequest();
