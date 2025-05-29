@@ -183,70 +183,106 @@
 <p><strong>সচেতন হোন, নিরাপদ থাকুন — জীবন বাঁচান।</strong></p>
 
   <script>
-    const domain = 'http://joypurhat-com.us.hostnil.uk';
+  const domain = 'http://joypurhat-com.us.hostnil.uk';
 
-    async function searchDonors() {
-      const group = document.getElementById('group').value;
-      const upazila = document.getElementById('upazila').value;
-      const results = document.getElementById('results');
-      results.innerHTML = '<p>লোড হচ্ছে...</p>';
+  function searchDonors() {
+    const group = document.getElementById('group').value;
+    const upazila = document.getElementById('upazila').value;
+    const results = document.getElementById('results');
+    results.innerHTML = '<p>লোড হচ্ছে...</p>';
 
-      if (!group || !upazila) {
-        results.innerHTML = '<p style="color:red;">সব ফিল্ড পূরণ করুন</p>';
-        return;
-      }
+    if (!group || !upazila) {
+      results.innerHTML = '<p style="color:red;">সব ফিল্ড পূরণ করুন</p>';
+      return;
+    }
 
-      try {
-        const url = `${domain}/bloodapi.php?group=${encodeURIComponent(group)}&upazila=${upazila}`;
-        const res = await fetch(url);
-        const data = await res.json();
+    const url = domain + '/bloodapi.php?group=' + encodeURIComponent(group) + '&upazila=' + encodeURIComponent(upazila);
 
-        if (!data.length) {
-          results.innerHTML = '<p>কোনো তথ্য পাওয়া যায়নি</p>';
-          return;
+    // XMLHttpRequest ব্যবহার করা হলো WebView এর জন্য বেশি উপযুক্ত
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        try {
+          const data = JSON.parse(xhr.responseText);
+
+          if (!data.length) {
+            results.innerHTML = '<p>কোনো তথ্য পাওয়া যায়নি</p>';
+            return;
+          }
+
+          results.innerHTML = '';
+          for (let i = 0; i < data.length; i++) {
+            const donor = data[i];
+            const fileName = donor.profile.split('/').pop();
+            const imageURL = domain + '/uploads/blood_profiles/' + fileName;
+            const isFemale = donor.gender.toLowerCase() === 'female';
+            const genderLabel = isFemale ? 'নারী' : 'পুরুষ';
+
+            const phoneField = isFemale
+              ? "<button class='reveal-btn' onclick=\"this.nextElementSibling.style.display='inline'; this.style.display='none'\">ভিউ নাম্বার</button>" +
+                "<span style='display:none;'>" + donor.contact + " <button class='copy-btn' onclick='copyText(\"" + donor.contact + "\")'>কপি</button></span>"
+              : donor.contact + " <button class='copy-btn' onclick='copyText(\"" + donor.contact + "\")'>কপি</button>";
+
+            const rawWhatsapp = donor.whatsapp || '';
+            const formattedWhatsapp = rawWhatsapp.startsWith('+88') ? rawWhatsapp : '+88' + rawWhatsapp;
+            const whatsappBtn = rawWhatsapp
+              ? "<br><a class='whatsapp-btn' href='https://wa.me/" + formattedWhatsapp.replace(/\D/g, '') + "' target='_blank'>হোয়াটসঅ্যাপে চ্যাট</a>"
+              : '';
+
+            results.innerHTML +=
+              "<div class='card'>" +
+              "<img src='" + imageURL + "' alt='" + donor.name + "' />" +
+              "<div class='info'>" +
+              "<strong>" + donor.name + "</strong> (" + genderLabel + ")<br>" +
+              "রক্ত: " + donor.blood_group + "<br>" +
+              "মোবাইল: " + phoneField +
+              whatsappBtn +
+              "</div></div>";
+          }
+        } catch (e) {
+          results.innerHTML = '<p style="color:red;">ডেটা পড়া যায়নি</p>';
+          console.error(e);
         }
-
-        results.innerHTML = '';
-        data.forEach(donor => {
-          const fileName = donor.profile.split('/').pop();
-          const imageURL = `${domain}/uploads/blood_profiles/${fileName}`;
-          const isFemale = donor.gender.toLowerCase() === 'female';
-          const genderLabel = isFemale ? 'নারী' : 'পুরুষ';
-
-          const phoneField = isFemale ? `
-            <button class='reveal-btn' onclick="this.nextElementSibling.style.display='inline'; this.style.display='none'">ভিউ নাম্বার</button>
-            <span style='display:none;'>${donor.contact} <button class='copy-btn' onclick='copyText("${donor.contact}")'>কপি</button></span>
-          ` : `${donor.contact} <button class='copy-btn' onclick='copyText("${donor.contact}")'>কপি</button>`;
-
-          const rawWhatsapp = donor.whatsapp || '';
-          const formattedWhatsapp = rawWhatsapp.startsWith('+88') ? rawWhatsapp : '+88' + rawWhatsapp;
-          const whatsappBtn = rawWhatsapp 
-            ? `<br><a class='whatsapp-btn' href='https://wa.me/${formattedWhatsapp.replace(/\D/g, '')}' target='_blank'>হোয়াটসঅ্যাপে চ্যাট</a>` 
-            : '';
-
-          results.innerHTML += `
-            <div class="card">
-              <img src="${imageURL}" alt="${donor.name}" />
-              <div class="info">
-                <strong>${donor.name}</strong> (${genderLabel})<br>
-                রক্ত: ${donor.blood_group}<br>
-                মোবাইল: ${phoneField}
-                ${whatsappBtn}
-              </div>
-            </div>
-          `;
-        });
-      } catch (e) {
-        results.innerHTML = '<p style="color:red;">ত্রুটি ঘটেছে</p>';
-        console.error(e);
+      } else {
+        results.innerHTML = '<p style="color:red;">সার্ভার ত্রুটি</p>';
       }
-    }
+    };
 
-    function copyText(text) {
-      navigator.clipboard.writeText(text).then(() => {
+    xhr.onerror = function () {
+      results.innerHTML = '<p style="color:red;">নেটওয়ার্ক ত্রুটি</p>';
+    };
+
+    xhr.send();
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
         alert('কপি হয়েছে: ' + text);
+      }).catch(function () {
+        fallbackCopyText(text);
       });
+    } else {
+      fallbackCopyText(text);
     }
+  }
+
+  function fallbackCopyText(text) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand("copy");
+      alert('কপি হয়েছে: ' + text);
+    } catch (err) {
+      alert('কপি করা যায়নি');
+    }
+    document.body.removeChild(textarea);
+  }
   </script>
+  
 </body>
 </html>
