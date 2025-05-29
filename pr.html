@@ -266,7 +266,7 @@
 
         function fetchImages(category = "nature", page = 1) {
             gallery.innerHTML = "<p>লোড হচ্ছে...</p>";
-            fetch(`http://pixabay.com/api/?key=${apiKey}&q=${category}&image_type=photo&orientation=horizontal&per_page=20&page=${page}`)
+            fetch(`https://pixabay.com/api/?key=${apiKey}&q=${category}&image_type=photo&orientation=horizontal&per_page=20&page=${page}`)
                 .then(response => response.json())
                 .then(data => {
                     gallery.innerHTML = "";
