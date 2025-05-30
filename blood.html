@@ -209,7 +209,7 @@
         results.innerHTML = '';
         data.forEach(donor => {
           const fileName = donor.profile.split('/').pop();
-          const imageURL = `${domain}/uploads/blood_profiles/${fileName}`;
+          const imageURL = `${domain}/image/${fileName}`;
           const isFemale = donor.gender.toLowerCase() === 'female';
           const genderLabel = isFemale ? 'নারী' : 'পুরুষ';
 
